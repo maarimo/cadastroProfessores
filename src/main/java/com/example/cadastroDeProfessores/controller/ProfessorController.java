@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/professores")
+@RequestMapping("/professores")
 @AllArgsConstructor
 public class ProfessorController {
 
@@ -31,7 +31,7 @@ public class ProfessorController {
 
     //BuscarPorId
     @GetMapping("/{id}")
-    public ProfessorDTO buscarPorId(@PathVariable @RequestBody Long id){
+    public ProfessorDTO buscarPorId(@PathVariable Long id){
         return professorService.buscarPorId(id);
     }
 
