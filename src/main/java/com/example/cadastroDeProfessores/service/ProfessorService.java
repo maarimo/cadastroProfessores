@@ -4,6 +4,7 @@ import com.example.cadastroDeProfessores.dto.ProfessorCreateDTO;
 import com.example.cadastroDeProfessores.dto.ProfessorDTO;
 import com.example.cadastroDeProfessores.dto.ProfessorUpdateDTO;
 import com.example.cadastroDeProfessores.entity.ProfessorEntity;
+import com.example.cadastroDeProfessores.exception.ProfessorNotFound;
 import com.example.cadastroDeProfessores.repository.ProfessorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class ProfessorService {
     //LISTID
     public ProfessorDTO buscarPorId(Long id){
         ProfessorEntity professor = professorRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Professor não encontrado"));
+                .orElseThrow(()-> new ProfessorNotFound(id));
 
         return toDTO(professor);
     }
@@ -56,7 +57,7 @@ public class ProfessorService {
     //UPDATE
     public ProfessorDTO atualizar(Long id, ProfessorUpdateDTO dto){
         ProfessorEntity professor = professorRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Professor não encontrado"));
+                .orElseThrow(()-> new ProfessorNotFound(id));
 
         professor.setNome(dto.getNome());
         professor.setEmail(dto.getEmail());
@@ -68,7 +69,7 @@ public class ProfessorService {
     //DELETE
     public void deletar(Long id){
         ProfessorEntity professor = professorRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Professor não encontrado"));
+                .orElseThrow(()-> new ProfessorNotFound(id));
 
             professorRepository.delete(professor);
     }
