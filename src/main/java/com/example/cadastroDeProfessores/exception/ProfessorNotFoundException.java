@@ -1,7 +1,7 @@
 package com.example.cadastroDeProfessores.exception;
 
-public class ProfessorNotFound extends RuntimeException {
-    public ProfessorNotFound(Long id) {
+public class ProfessorNotFoundException extends RuntimeException {
+    public ProfessorNotFoundException(Long id) {
         super("Professor " + id + " não encontrado");
     }
 }
